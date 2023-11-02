@@ -8,3 +8,9 @@
 |-> .env dosyasi olustur
 |-> settings.py a git "from decouple import config" yaz
 |-> settings.py a git ve "SECRET_KEY = config('SECRET_KEY')" yaz 
+
+# pip install djangorestframework
+
+    --->  https://www.django-rest-framework.org/api-guide/serializers/
+
+model > serializer > view > url
