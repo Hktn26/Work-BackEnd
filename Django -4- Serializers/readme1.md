@@ -14,3 +14,5 @@
     --->  https://www.django-rest-framework.org/api-guide/serializers/
 
 model > serializer > view > url
+
+# https://pypi.org/project/djangorestframework/
