@@ -7,6 +7,7 @@ from .views import (
     student_update,
     student_delete,
     student_list_create,
+    studen_detail_update_delete,
 )
 
 urlpatterns = [
@@ -17,4 +18,5 @@ urlpatterns = [
     path('student_update/<int:pk>', student_update),  # Tek-Kayit Guncelleme
     path('student_delete/<int:pk>', student_delete),  # Tek-Kayit Silme
     path('student_list_create/', student_list_create),
+    path('studen_detail_update_delete/<int:pk>', studen_detail_update_delete),
 ]
