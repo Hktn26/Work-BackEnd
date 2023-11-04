@@ -22,9 +22,79 @@ def home(request):
 
 '''
 # ------------------------------------------------------------
-# StudentSeralizers Tum Kayitlari Goruntuleme
+# StudentSeralizers Tum Kayitlari Goruntuleme: serializer -> json
 
 from .models import Student
+from .serializers import StudentSerializer
+from rest_framework import status
 
+@api_view(['GET']) # Default ['GET']
 def student_list(request):
-    student = Student.objects.all()
+    students = Student.objects.all()
+    serializer = StudentSerializer(students, many=True)
+    return Response(serializer.data)
+
+# ------------------------------------------------------------
+# StudentSeralizers Yeni Kayit Ekleme: json -> serializer
+
+# HTTP Status Codes:
+# https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+
+@api_view(['POST'])
+def student_create(request):
+    serializer = StudentSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({
+            "message": "Created Successfully"
+        }, status=status.HTTP_201_CREATED)
+    else:
+        return Response({
+            "message": "Data not validated",
+            "data": serializer.data
+        }, status=status.HTTP_400_BAD_REQUEST)
+    
+
+# ------------------------------------------------------------
+# StudentSeralizers Tek Kayit Goruntuleme: 
+
+from django.shortcuts import get_object_or_404
+
+@api_view(['GET'])
+def student_detail(request, pk):
+    # student = Student.objects.get(id=pk)
+    student = get_object_or_404(Student, id=pk) # Bulamadiginda Hata Gosterme 
+    serializer = StudentSerializer(instance=student)
+    return Response(serializer.data)
+
+# ------------------------------------------------------------
+# StudentSeralizers Tek Kayit Guncelleme: 
+
+
+@api_view(['PUT']) 
+def student_update(request, pk):
+    student = get_object_or_404(Student, id=pk)
+    serializer = StudentSerializer(instance=student, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({
+            "message": "Update Successfully"
+        }, status=status.HTTP_202_ACCEPTED)
+    else:
+        return Response({
+            "message": "Data not validated",
+            "data": serializer.data
+        }, status=status.HTTP_400_BAD_REQUEST)
+    
+# ------------------------------------------------------------
+# StudentSeralizers Tek Kayit Silme: 
+
+@api_view(['DELETE'])
+
+def student_delete(request, pk):
+    student = get_object_or_404(Student, id=pk)
+    student.delete()
+    return Response({
+            "message": "Delete Successfully"
+        }, status=status.HTTP_204_NO_CONTENT)
+    
