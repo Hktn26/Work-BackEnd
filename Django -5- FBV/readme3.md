@@ -8,6 +8,9 @@
     pip freeze > requirements.txt
     django-admin startproject main .
     django-admin startapp fscohort /ya da/ python manage.py startapp fscohort
+    python manage.py migrate
+    python manage.py makemigrations
+    python manage.py createsuperuser
     python manage.py runserver
 
 # App Olusturduktan sonra
