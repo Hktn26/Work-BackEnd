@@ -134,6 +134,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Page Number Pagination, API Global Settings:
 
 REST_FRAMEWORK = {
-    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    # 'PAGE_SIZE': 25
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination', # Sayfa No ile  sayfalama
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination', # Adet_Baslangic Limit Offset ile sayfalama
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.CursorPagination', # Kursor ile safalama {modelde "createed" isimli field bekler.}
+    # 'PAGE_SIZE': 50
 }
