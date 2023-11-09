@@ -9,11 +9,25 @@ from .paginations import (
     CustomCursorPagination
 )
 
+# Django filitreleme modulu
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 class TodoView(ModelViewSet):
-    queryset = Todo.objects.all()
+    queryset = Todo.objects.all().order_by('title')
     serializer_class = TodoSerializer
-    pagination_class = CustomPageNumberPagination  # Local Settings:
+    # filitreleme modulleri:
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter] # local filiter settings.
+    # Filter: Birebir eslestirme
+    filterset_fields = ['id','priority','is_done']
+    #Search: Icinde arama
+    # https://www.django-rest-framework.org/api-guide/filtering/#searchfilter
+    search_fields = ['title', 'description']
+    # Ordering: Siralama
+    ordering_fields = ['id', 'title'] # '__all__'
+    # --------------------------------------------------------------
+   
+    # pagination_class = CustomPageNumberPagination  # Local Settings:
     # pagination_class = CustomCursorPagination  # Local Settings:
     # pagination_class = CustomLimitOffsetPahination  # Local Settings:
 
@@ -23,6 +37,8 @@ class TodoView(ModelViewSet):
     # PageNumberPagination.page_size_query_parm = 'Adet' # URL ile kac adet gonderilecegini belirleyebilirim
     # PageNumberPagination.page_query_param = 'Sayfa' #Page ismini degistirdik
 
+'''
+# Manuel arama ornegi:
     # Override:
     def get_queryset(self):
         # URL'den parametre degerini yakala:
@@ -34,3 +50,5 @@ class TodoView(ModelViewSet):
             # Arama yap
             # queryset icinde ara:
             return self.queryset.filter(title__contains=title)  # filitreleme
+'''
+

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Modules:
     'rest_framework',
+    'django_filters',
     # Apps:
     'todo',
 
@@ -138,4 +139,11 @@ REST_FRAMEWORK = {
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination', # Adet_Baslangic Limit Offset ile sayfalama
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.CursorPagination', # Kursor ile safalama {modelde "createed" isimli field bekler.}
     # 'PAGE_SIZE': 50
+
+    # 'DEFAULT_FILTER_BACKENDS': [
+    #   'django_filters.rest_framework.DjangoFilterBackend', 
+    #   'rest_framework.filters.SearchFilter',
+    #   'rest_framework.filters.OrderingFilter'
+    # '] # django filitreleme modulu 
+    # 'DEFAULT_FILTER_BACKENDS': ['rest_framework.filters.SearchFilter'] # Ayri ayri yapilirsa bir onceki iptal olur 
 }
