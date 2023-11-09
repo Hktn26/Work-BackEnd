@@ -12,7 +12,7 @@ from .models import Todo
 from faker import Faker
 
 def run():
-    fake = Faker() # Faker(['tr-TR'])
+    fake = Faker(['tr-TR']) # Faker(['tr-TR'])
     for todo in range(200):
         Todo.objects.create(
             title=fake.sentence(), 
